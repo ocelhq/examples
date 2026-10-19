@@ -1,49 +1,59 @@
 # Ocel examples
 
-Apps you can clone, run with `ocel dev` and ship with `ocel deploy`. [Install the CLI](https://ocel.dev/docs/install) first.
+Apps you can copy, run with `ocel dev` and ship with `ocel deploy`. [Install the CLI](https://ocel.dev/docs/install) first.
 
-- **[`deploy/`](deploy)** — plain apps with no SDK. Proof the CLI ships your stack as it is.
-- **[`sdk/`](sdk)** — one SDK primitive per example, in every language.
-- **[`apps/`](apps)** — real apps that put several primitives together.
+Every directory at the top level is a template that shows one thing: a stack deployed as-is, or one SDK primitive in one language. [`apps/`](apps) holds real apps that put several primitives together. Each one stands alone, so you can copy just the one you want:
 
-## Deploy
+```bash
+npx giget@latest gh:ocelhq/examples/node-kv my-app
+cd my-app && pnpm install && ocel dev
+```
+
+Every example is listed in [`examples.json`](examples.json) along with its language, framework and the primitives it uses.
+
+## Stacks
+
+No SDK in these: they show that the CLI ships the stack as it is.
 
 | Stack | Example |
 | ----- | ------- |
-| Next.js | [`deploy/nextjs`](deploy/nextjs) |
-| Express | [`deploy/node-express`](deploy/node-express) |
-| Hono | [`deploy/node-hono`](deploy/node-hono) |
-| Fastify | [`deploy/node-fastify`](deploy/node-fastify) |
-| NestJS | [`deploy/nestjs`](deploy/nestjs) |
-| Go (`net/http`) | [`deploy/go`](deploy/go) |
-| Python (FastAPI) | [`deploy/python`](deploy/python) |
-| Rust (axum) | [`deploy/rust`](deploy/rust) |
-| Several apps, one project | [`deploy/monorepo`](deploy/monorepo) |
-| Your own domain | [`deploy/custom-domain`](deploy/custom-domain) |
+| Express | [`node-express`](node-express) |
+| Hono | [`node-hono`](node-hono) |
+| Fastify | [`node-fastify`](node-fastify) |
+| NestJS | [`node-nestjs`](node-nestjs) |
+| Next.js | [`node-nextjs`](node-nextjs) |
+| Go (`net/http`) | [`go-nethttp`](go-nethttp) |
+| Python (FastAPI) | [`python-fastapi`](python-fastapi) |
+| Rust (axum) | [`rust-axum`](rust-axum) |
+| Several apps, one project | [`node-monorepo`](node-monorepo) |
+| Your own domain | [`node-custom-domain`](node-custom-domain) |
 
-## SDK
+## Primitives
+
+One SDK primitive per example. Node uses Express unless the primitive has a framework adapter, in which case each adapter gets its own example.
 
 | Primitive | Node | Go | Python | Rust |
 | --------- | ---- | -- | ------ | ---- |
-| Postgres | [node](sdk/postgres/node) | [go](sdk/postgres/go) | [python](sdk/postgres/python) | [rust](sdk/postgres/rust) |
-| Bucket | [express](sdk/bucket/node-express) · [hono](sdk/bucket/node-hono) · [next](sdk/bucket/nextjs) | [go](sdk/bucket/go) | [python](sdk/bucket/python) | [rust](sdk/bucket/rust) |
-| KV | [node](sdk/kv/node) | [go](sdk/kv/go) | [python](sdk/kv/python) | [rust](sdk/kv/rust) |
-| Topic | [node](sdk/topic/node) | [go](sdk/topic/go) | [python](sdk/topic/python) | [rust](sdk/topic/rust) |
-| Task | [node](sdk/task/node) | [go](sdk/task/go) | [python](sdk/task/python) | [rust](sdk/task/rust) |
-| Worker | [node](sdk/worker/node) | [go](sdk/worker/go) | [python](sdk/worker/python) | [rust](sdk/worker/rust) |
-| Realtime | [express](sdk/realtime/node-express) · [hono](sdk/realtime/node-hono) · [next](sdk/realtime/nextjs) | [go](sdk/realtime/go) | [python](sdk/realtime/python) | [rust](sdk/realtime/rust) |
-| Env & secrets | [node](sdk/env/node) | [go](sdk/env/go) | [python](sdk/env/python) | [rust](sdk/env/rust) |
+| Postgres | [`node-postgres`](node-postgres) | [`go-postgres`](go-postgres) | [`python-postgres`](python-postgres) | [`rust-postgres`](rust-postgres) |
+| Bucket | [`node-bucket-express`](node-bucket-express) · [`-hono`](node-bucket-hono) · [`-nextjs`](node-bucket-nextjs) | [`go-bucket`](go-bucket) | [`python-bucket`](python-bucket) | [`rust-bucket`](rust-bucket) |
+| KV | [`node-kv`](node-kv) | [`go-kv`](go-kv) | [`python-kv`](python-kv) | [`rust-kv`](rust-kv) |
+| Topic | [`node-topic`](node-topic) | [`go-topic`](go-topic) | [`python-topic`](python-topic) | [`rust-topic`](rust-topic) |
+| Task | [`node-task`](node-task) | [`go-task`](go-task) | [`python-task`](python-task) | [`rust-task`](rust-task) |
+| Worker | [`node-worker`](node-worker) | [`go-worker`](go-worker) | [`python-worker`](python-worker) | [`rust-worker`](rust-worker) |
+| Realtime | [`node-realtime-express`](node-realtime-express) · [`-hono`](node-realtime-hono) · [`-nextjs`](node-realtime-nextjs) | [`go-realtime`](go-realtime) | [`python-realtime`](python-realtime) | [`rust-realtime`](rust-realtime) |
+| Env & secrets | [`node-env`](node-env) | [`go-env`](go-env) | [`python-env`](python-env) | [`rust-env`](rust-env) |
 
-Bring your own infrastructure: [`sdk/pulumi`](sdk/pulumi) and [`sdk/sst`](sdk/sst) bind a resource your Pulumi or SST program provisions to an Ocel declaration; [`sdk/transforms`](sdk/transforms) patches what Ocel provisions.
+Bring your own infrastructure: [`node-pulumi`](node-pulumi) and [`node-sst`](node-sst) bind a resource your Pulumi or SST program provisions to an Ocel declaration, and [`node-transforms`](node-transforms) patches what Ocel provisions.
 
 ## Apps
 
 | App | Stack | Uses |
 | --- | ----- | ---- |
-| [`apps/file-share`](apps/file-share) | Next.js | bucket, postgres, kv |
-| [`apps/chat`](apps/chat) | Hono | realtime, postgres |
-| [`apps/media-pipeline`](apps/media-pipeline) | Python | bucket, topic, postgres |
-| [`apps/jobs-api`](apps/jobs-api) | Rust | task, postgres, kv |
+| [`node-file-share`](apps/node-file-share) | Next.js | bucket, postgres, kv |
+| [`node-chat`](apps/node-chat) | Hono | realtime, postgres |
+| [`go-uptime-monitor`](apps/go-uptime-monitor) | Go (`net/http`) | task (cron), topic, postgres, kv, env |
+| [`python-media-pipeline`](apps/python-media-pipeline) | Python (FastAPI) | bucket, topic, postgres |
+| [`rust-jobs-api`](apps/rust-jobs-api) | Rust (axum) | task, postgres, kv |
 
 ## Adding one
 

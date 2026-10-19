@@ -1,29 +1,55 @@
 # Contributing an example
 
 Every example is something a stranger clones, runs `ocel dev` in, and reads in five
-minutes. These rules keep forty-odd of them consistent and cheap to keep working.
+minutes. These rules keep fifty-odd of them consistent and cheap to keep working.
 
 ## Where it goes
 
-| Tier       | Path                     | Shows                                         | SDK  |
-| ---------- | ------------------------ | --------------------------------------------- | ---- |
-| `deploy/`  | `deploy/<stack>`         | that the CLI deploys this stack as-is         | none |
-| `sdk/`     | `sdk/<primitive>/<lang>` | one SDK primitive, and nothing else           | one  |
-| `apps/`    | `apps/<name>`            | a real app composing several primitives       | many |
+| Kind      | Path                     | Shows                                   | SDK  |
+| --------- | ------------------------ | --------------------------------------- | ---- |
+| stack     | `<lang>-<stack>`         | that the CLI deploys this stack as-is   | none |
+| primitive | `<lang>-<primitive>`     | one SDK primitive, and nothing else     | one  |
+| app       | `apps/<lang>-<use-case>` | a real app composing several primitives | many |
 
-- `<lang>` is `node`, `go`, `python` or `rust`. A node primitive with a framework adapter
-  (`ocel/bucket/*`, `ocel/realtime/*`) gets one directory per adapter instead:
-  `node-express`, `node-hono`, `nextjs`. A plain `node` example uses Express.
+- `<lang>` is `node`, `go`, `python` or `rust`. `<primitive>` is the SDK's own name for
+  it: `bucket`, `env`, `kv`, `postgres`, `realtime`, `task`, `topic`, `worker`. A stack is
+  named for its framework: `node-express`, `go-nethttp`, `python-fastapi`, `rust-axum`.
+- A node primitive with a framework adapter (`ocel/bucket/*`, `ocel/realtime/*`) gets one
+  directory per adapter, suffixed with it: `node-bucket-express`, `node-bucket-hono`,
+  `node-bucket-nextjs`. Any other node primitive uses Express and has no suffix.
 - A framework variant earns a directory only when Ocel treats it differently. Go, Python
   and Rust have no framework layer in Ocel, so they get one each: `net/http` for Go,
   FastAPI for Python, axum for Rust.
+- An app's name says what it does (`go-uptime-monitor`, not `go-app`). Every language
+  has at least one.
+
+## One name, everywhere
+
+A name is unique across the whole repo, `apps/` included, so the name alone finds any
+example. The directory, the `ocel.json` slug, the `package.json` name, the Go module
+(`example.com/<name>`), the crate name and the README title are all that one string. A
+tool that copies an example out (`giget` today, `ocel init --example <name>` later)
+renames the project by replacing it.
+
+Each example stands alone, because it is copied out alone:
+
+- It has its own `.gitignore`: build output for its language, then `.ocel/`, `.env`,
+  `.env.*` and `!.env.example`. JS lockfiles and `ocel.lock` stay ignored only in the root
+  `.gitignore`, so a copied project keeps the ones it generates.
+- Its README links to other examples by absolute URL
+  (`https://github.com/ocelhq/examples/tree/main/<name>`), never `../`.
+- It is listed in [`examples.json`](examples.json) with its `kind`, `lang`, `framework`,
+  the primitives it `uses` and a one-sentence `description`, and linked from the root
+  `README.md`.
+
+`python3 scripts/check.py` checks all of this.
 
 ## What every example has
 
 - **`README.md`**, in this shape:
 
   ````md
-  # <path, e.g. sdk/kv/rust>
+  # <name, e.g. rust-kv>
 
   One or two sentences: what this shows, and the one thing worth noticing.
 
@@ -53,17 +79,17 @@ minutes. These rules keep forty-odd of them consistent and cheap to keep working
 
   ```json
   {
-    "$schema": "https://ocel.dev/schema/0.0.1/ocel.schema.json",
-    "slug": "sdk-kv-rust"
+    "$schema": "https://ocel.dev/schema/ocel.schema.json",
+    "slug": "rust-kv"
   }
   ```
 
-  The slug is the example's path with `/` replaced by `-`.
-
 - **The published SDK at a pinned version**, never a path or workspace link:
-  `ocel@0.0.1` (npm), `ocel-sdk = "0.0.1"` (crates.io, imported as `ocel`),
-  `ocel==0.0.1` (PyPI), `ocel.dev v0.0.1` (Go). The CLI is not a dependency; the README
-  assumes `ocel` is installed.
+  `ocel@0.0.2` (npm), `ocel-sdk = "0.0.2"` (crates.io, imported as `ocel`),
+  `ocel==0.0.2` (PyPI), `ocel.dev v0.0.2` (Go). An SDK only works with the CLI of its own
+  release, so every example pins the same version, and the repo is tagged `v<version>`
+  when they all move to it. The CLI is not a dependency; the README assumes `ocel` is
+  installed.
 
 ## What no example has
 
@@ -110,4 +136,5 @@ config, renamed files, inlined assets or README caveats to get around it.
    The summary must say it built at least one function per app — `Built 0 functions`
    means the app was not detected. A failure here is an Ocel gap (see above), not a
    reason to change the example.
-3. The example appears in the table in the root `README.md`.
+3. `python3 scripts/check.py` passes: the example is in `examples.json` and the root
+   `README.md`, and its names line up.

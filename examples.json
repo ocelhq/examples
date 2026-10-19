@@ -1,0 +1,590 @@
+{
+  "$comment": "One entry per example. `ocel init --example <name>` resolves names here; scripts/check.py keeps it in step with the tree.",
+  "examples": [
+    {
+      "name": "go-bucket",
+      "path": "go-bucket",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "bucket"
+      ],
+      "description": "An object bucket with a route that uploads and routes that read back."
+    },
+    {
+      "name": "go-env",
+      "path": "go-env",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "env"
+      ],
+      "description": "Two variables declared as a struct: one plain with a default, one secret."
+    },
+    {
+      "name": "go-kv",
+      "path": "go-kv",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "kv"
+      ],
+      "description": "A key-value store with a typed counter entry."
+    },
+    {
+      "name": "go-nethttp",
+      "path": "go-nethttp",
+      "kind": "stack",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [],
+      "description": "A minimal Go net/http server deployed with the CLI alone, no SDK."
+    },
+    {
+      "name": "go-postgres",
+      "path": "go-postgres",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "postgres"
+      ],
+      "description": "A Postgres database declared in one line, used from two net/http routes."
+    },
+    {
+      "name": "go-realtime",
+      "path": "go-realtime",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "realtime"
+      ],
+      "description": "A realtime channel the server publishes to."
+    },
+    {
+      "name": "go-task",
+      "path": "go-task",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "task"
+      ],
+      "description": "A task: one unit of background work that you trigger with a payload and that returns a result."
+    },
+    {
+      "name": "go-topic",
+      "path": "go-topic",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "topic"
+      ],
+      "description": "A topic with two consumers."
+    },
+    {
+      "name": "go-worker",
+      "path": "go-worker",
+      "kind": "primitive",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "worker"
+      ],
+      "description": "A worker declared by hand and a task placed on it."
+    },
+    {
+      "name": "node-bucket-express",
+      "path": "node-bucket-express",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "bucket"
+      ],
+      "description": "A bucket with a browser uploader, mounted on Express."
+    },
+    {
+      "name": "node-bucket-hono",
+      "path": "node-bucket-hono",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "hono",
+      "uses": [
+        "bucket"
+      ],
+      "description": "A bucket with a browser uploader, mounted on Hono."
+    },
+    {
+      "name": "node-bucket-nextjs",
+      "path": "node-bucket-nextjs",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "nextjs",
+      "uses": [
+        "bucket"
+      ],
+      "description": "A bucket with a browser uploader, in the Next.js App Router."
+    },
+    {
+      "name": "node-custom-domain",
+      "path": "node-custom-domain",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "express",
+      "uses": [],
+      "description": "A tiny Express app that is served on your own domain."
+    },
+    {
+      "name": "node-env",
+      "path": "node-env",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "env"
+      ],
+      "description": "An Express 5 app that reads a plain variable with a default and a secret, both declared once with defineEnv."
+    },
+    {
+      "name": "node-express",
+      "path": "node-express",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "express",
+      "uses": [],
+      "description": "An Express 5 app in TypeScript, deployed as-is."
+    },
+    {
+      "name": "node-fastify",
+      "path": "node-fastify",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "fastify",
+      "uses": [],
+      "description": "A Fastify app in TypeScript, deployed as-is."
+    },
+    {
+      "name": "node-hono",
+      "path": "node-hono",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "hono",
+      "uses": [],
+      "description": "A Hono app on Node in TypeScript, deployed as-is."
+    },
+    {
+      "name": "node-kv",
+      "path": "node-kv",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "kv"
+      ],
+      "description": "An Express 5 app on a key-value store (Valkey) with a typed text entry that expires and a counter."
+    },
+    {
+      "name": "node-monorepo",
+      "path": "node-monorepo",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "nextjs+express",
+      "uses": [],
+      "description": "A pnpm workspace with two apps, a Next.js web and an Express api, deployed from one ocel.json."
+    },
+    {
+      "name": "node-nestjs",
+      "path": "node-nestjs",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "nestjs",
+      "uses": [],
+      "description": "A NestJS app with one controller, deployed with no Ocel code in it."
+    },
+    {
+      "name": "node-nextjs",
+      "path": "node-nextjs",
+      "kind": "stack",
+      "lang": "node",
+      "framework": "nextjs",
+      "uses": [],
+      "description": "A Next.js App Router app with a page and a route handler, deployed with no Ocel code in it."
+    },
+    {
+      "name": "node-postgres",
+      "path": "node-postgres",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "postgres"
+      ],
+      "description": "An Express 5 notes API on a Postgres database that exists because the code says postgres(\"main\")."
+    },
+    {
+      "name": "node-pulumi",
+      "path": "node-pulumi",
+      "kind": "integration",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "pulumi"
+      ],
+      "description": "@ocel/pulumi lets a Pulumi program publish a resource it provisions as an Ocel binding, for when you want to own that infrastructure yourself instead of having Ocel create it."
+    },
+    {
+      "name": "node-realtime-express",
+      "path": "node-realtime-express",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "realtime"
+      ],
+      "description": "A realtime channel on Express."
+    },
+    {
+      "name": "node-realtime-hono",
+      "path": "node-realtime-hono",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "hono",
+      "uses": [
+        "realtime"
+      ],
+      "description": "A realtime channel on Hono."
+    },
+    {
+      "name": "node-realtime-nextjs",
+      "path": "node-realtime-nextjs",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "nextjs",
+      "uses": [
+        "realtime"
+      ],
+      "description": "A realtime channel in the Next.js App Router."
+    },
+    {
+      "name": "node-sst",
+      "path": "node-sst",
+      "kind": "integration",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "sst"
+      ],
+      "description": "@ocel/sst lets an SST app publish a resource it provisions as an Ocel binding, for when you want to own that infrastructure yourself instead of having Ocel create it."
+    },
+    {
+      "name": "node-task",
+      "path": "node-task",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "task"
+      ],
+      "description": "An Express 5 app that triggers a background task from a route and reads the run back by id."
+    },
+    {
+      "name": "node-topic",
+      "path": "node-topic",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "topic"
+      ],
+      "description": "An Express 5 app that sends orders to a topic and a consumer that handles each one."
+    },
+    {
+      "name": "node-transforms",
+      "path": "node-transforms",
+      "kind": "integration",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "transforms"
+      ],
+      "description": "@ocel/transforms patches the cloud resources Ocel provisions, from a module Ocel runs before it provisions anything, for when the defaults almost fit."
+    },
+    {
+      "name": "node-worker",
+      "path": "node-worker",
+      "kind": "primitive",
+      "lang": "node",
+      "framework": "express",
+      "uses": [
+        "worker"
+      ],
+      "description": "An Express 5 app that places a task on a worker of its own with a concurrency cap and middleware."
+    },
+    {
+      "name": "python-bucket",
+      "path": "python-bucket",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "bucket"
+      ],
+      "description": "A FastAPI app that uploads, downloads and lists files in an Ocel-provisioned object bucket."
+    },
+    {
+      "name": "python-env",
+      "path": "python-env",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "env"
+      ],
+      "description": "A FastAPI app that reads a plain variable with a default and a secret."
+    },
+    {
+      "name": "python-fastapi",
+      "path": "python-fastapi",
+      "kind": "stack",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [],
+      "description": "A minimal FastAPI server deployed with the CLI alone, no SDK."
+    },
+    {
+      "name": "python-kv",
+      "path": "python-kv",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "kv"
+      ],
+      "description": "A FastAPI app that caches user profiles and counts reads in an Ocel-provisioned key-value store (Valkey)."
+    },
+    {
+      "name": "python-postgres",
+      "path": "python-postgres",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "postgres"
+      ],
+      "description": "A FastAPI app that stores and lists notes in an Ocel-provisioned Postgres database."
+    },
+    {
+      "name": "python-realtime",
+      "path": "python-realtime",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "realtime"
+      ],
+      "description": "A FastAPI app that publishes events to a realtime channel that browsers subscribe to."
+    },
+    {
+      "name": "python-task",
+      "path": "python-task",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "task"
+      ],
+      "description": "A FastAPI app that hands slow work to a task and looks the run up afterwards."
+    },
+    {
+      "name": "python-topic",
+      "path": "python-topic",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "topic"
+      ],
+      "description": "A FastAPI app that publishes orders to a topic with two consumers."
+    },
+    {
+      "name": "python-worker",
+      "path": "python-worker",
+      "kind": "primitive",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "worker"
+      ],
+      "description": "A task placed on a worker you declare yourself."
+    },
+    {
+      "name": "rust-axum",
+      "path": "rust-axum",
+      "kind": "stack",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [],
+      "description": "A minimal axum server deployed with the CLI alone, no SDK."
+    },
+    {
+      "name": "rust-bucket",
+      "path": "rust-bucket",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "bucket"
+      ],
+      "description": "An object bucket declared as a struct field, written and read from an axum app."
+    },
+    {
+      "name": "rust-env",
+      "path": "rust-env",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "env"
+      ],
+      "description": "Environment variables declared as a struct: one plain variable with a default, and one secret."
+    },
+    {
+      "name": "rust-kv",
+      "path": "rust-kv",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "kv"
+      ],
+      "description": "A key-value store (Valkey) declared as a struct field, with a typed counter entry."
+    },
+    {
+      "name": "rust-postgres",
+      "path": "rust-postgres",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "postgres"
+      ],
+      "description": "A Postgres database declared as a struct field, used from an axum app through its sqlx pool."
+    },
+    {
+      "name": "rust-realtime",
+      "path": "rust-realtime",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "realtime"
+      ],
+      "description": "A realtime channel that the server publishes on and browsers subscribe to."
+    },
+    {
+      "name": "rust-task",
+      "path": "rust-task",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "task"
+      ],
+      "description": "A task: a function you trigger with a payload, run by a worker, with a result you can read back later."
+    },
+    {
+      "name": "rust-topic",
+      "path": "rust-topic",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "topic"
+      ],
+      "description": "A topic and the consumer that handles its messages."
+    },
+    {
+      "name": "rust-worker",
+      "path": "rust-worker",
+      "kind": "primitive",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "worker"
+      ],
+      "description": "A named worker with its own settings, serving both a task and a topic consumer."
+    },
+    {
+      "name": "go-uptime-monitor",
+      "path": "apps/go-uptime-monitor",
+      "kind": "app",
+      "lang": "go",
+      "framework": "net/http",
+      "uses": [
+        "task",
+        "topic",
+        "postgres",
+        "kv",
+        "env"
+      ],
+      "description": "Register URLs and get told when one goes down or comes back."
+    },
+    {
+      "name": "node-chat",
+      "path": "apps/node-chat",
+      "kind": "app",
+      "lang": "node",
+      "framework": "hono",
+      "uses": [
+        "realtime",
+        "postgres"
+      ],
+      "description": "A small chat app on Hono: rooms, messages saved in Postgres, and new messages pushed to every open browser through Ocel realtime."
+    },
+    {
+      "name": "node-file-share",
+      "path": "apps/node-file-share",
+      "kind": "app",
+      "lang": "node",
+      "framework": "nextjs",
+      "uses": [
+        "bucket",
+        "postgres",
+        "kv"
+      ],
+      "description": "Upload files and hand out short links that expire."
+    },
+    {
+      "name": "python-media-pipeline",
+      "path": "apps/python-media-pipeline",
+      "kind": "app",
+      "lang": "python",
+      "framework": "fastapi",
+      "uses": [
+        "bucket",
+        "topic",
+        "postgres"
+      ],
+      "description": "Upload an image to a FastAPI app and get a thumbnail back, made in the background."
+    },
+    {
+      "name": "rust-jobs-api",
+      "path": "apps/rust-jobs-api",
+      "kind": "app",
+      "lang": "rust",
+      "framework": "axum",
+      "uses": [
+        "task",
+        "postgres",
+        "kv"
+      ],
+      "description": "An axum API that accepts jobs, runs them on a worker, and reports their status."
+    }
+  ]
+}
