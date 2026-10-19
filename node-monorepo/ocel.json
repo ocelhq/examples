@@ -1,0 +1,8 @@
+{
+  "$schema": "https://ocel.dev/schema/0.0.1/ocel.schema.json",
+  "slug": "node-monorepo",
+  "apps": [
+    { "name": "web", "path": "./apps/web" },
+    { "name": "api", "path": "./apps/api" }
+  ]
+}

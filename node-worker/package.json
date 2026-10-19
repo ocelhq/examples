@@ -1,0 +1,20 @@
+{
+  "name": "node-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/server.ts",
+    "start": "tsx src/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "ocel": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.0"
+  }
+}

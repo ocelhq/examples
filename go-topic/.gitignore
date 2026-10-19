@@ -1,0 +1,4 @@
+.ocel/
+.env
+.env.*
+!.env.example

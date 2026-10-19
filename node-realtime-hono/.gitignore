@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.tsbuildinfo
+public/client.js
+.ocel/
+.env
+.env.*
+!.env.example

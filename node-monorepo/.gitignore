@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.next/
+.next/
+next-env.d.ts
+.ocel/
+.env
+.env.*
+!.env.example
