@@ -2,7 +2,7 @@ module example.com/go-postgres
 
 go 1.27.0
 
-require ocel.dev v0.0.1
+require ocel.dev v0.0.2
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260709200747-435963d16310.1 // indirect

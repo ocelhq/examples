@@ -981,9 +981,9 @@ dependencies = [
 
 [[package]]
 name = "ocel-macros"
-version = "0.0.1"
+version = "0.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ec9dcb8296d156963d475ce014c5a52f2146ea5b03bf657f9e91728ea1b5593"
+checksum = "353e86658059e6ac7b1ea9d932bff6f13fe531d905ad022153af08569339881e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -992,9 +992,9 @@ dependencies = [
 
 [[package]]
 name = "ocel-sdk"
-version = "0.0.1"
+version = "0.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f6463dfd9f35b97790e46c62d03589b283fa68b4785df743387c5fb209dd8eeb"
+checksum = "6c3557234f005e5bf576bbd2e6685173b30a6aa5535064ef858c3a2a02c99800"
 dependencies = [
  "buffa",
  "buffa-types",
@@ -1212,6 +1212,18 @@ dependencies = [
  "libc",
  "untrusted",
  "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "rust-postgres"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "ocel-sdk",
+ "serde",
+ "serde_json",
+ "sqlx",
+ "tokio",
 ]
 
 [[package]]
@@ -1863,18 +1875,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23f0c9c52aa7cd7d77769a4cfe2a9adb1b331f489a41d912ce14513d5ab995c6"
 dependencies = [
  "unicode-ident",
-]
-
-[[package]]
-name = "rust-postgres"
-version = "0.1.0"
-dependencies = [
- "axum",
- "ocel-sdk",
- "serde",
- "serde_json",
- "sqlx",
- "tokio",
 ]
 
 [[package]]

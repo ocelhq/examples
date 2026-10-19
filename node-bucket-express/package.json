@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "express": "~5.0.0",
-    "ocel": "0.0.1",
+    "ocel": "0.0.2",
     "tsx": "^4.19.2"
   },
   "devDependencies": {

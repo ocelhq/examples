@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "ocel": "0.0.1",
+    "ocel": "0.0.2",
     "pg": "^8.22.0"
   },
   "devDependencies": {

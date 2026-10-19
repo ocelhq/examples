@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": { "start": "tsx src/server.ts", "typecheck": "tsc --noEmit" },
   "dependencies": {
-    "@ocel/pulumi": "0.0.1",
+    "@ocel/pulumi": "0.0.2",
     "@pulumi/aws": "^7.0.0",
     "@pulumi/pulumi": "^3.0.0",
     "express": "^5.0.0",
-    "ocel": "0.0.1",
+    "ocel": "0.0.2",
     "pg": "^8.22.0"
   },
   "devDependencies": {

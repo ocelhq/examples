@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": { "start": "tsx src/server.ts", "typecheck": "tsc --noEmit" },
   "dependencies": {
-    "@ocel/sst": "0.0.1",
+    "@ocel/sst": "0.0.2",
     "express": "^5.0.0",
-    "ocel": "0.0.1",
+    "ocel": "0.0.2",
     "pg": "^8.22.0",
     "sst": "^3.17.10"
   },
