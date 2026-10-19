@@ -1,0 +1,11 @@
+{
+  "name": "deploy-node-hono",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.ts",
+    "start": "node src/server.ts"
+  },
+  "dependencies": { "@hono/node-server": "^1.13.0", "hono": "^4.6.0" },
+  "devDependencies": { "@types/node": "^22", "typescript": "^5" }
+}

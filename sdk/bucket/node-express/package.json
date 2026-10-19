@@ -1,0 +1,22 @@
+{
+  "name": "sdk-bucket-node-express",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/client.ts --bundle --format=esm --outfile=public/client.js",
+    "dev": "npm run build && tsx src/server.ts",
+    "start": "npm run build && tsx src/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "~5.0.0",
+    "ocel": "0.0.1",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "~5.0.0",
+    "@types/node": "^20",
+    "esbuild": "^0.25.0",
+    "typescript": "^5"
+  }
+}

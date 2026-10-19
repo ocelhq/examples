@@ -1,0 +1,6 @@
+name: sdk-pulumi
+description: Pulumi provisions the database; ocel deploys the app that reads it
+runtime:
+  name: nodejs
+  options:
+    packagemanager: pnpm
