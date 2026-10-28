@@ -6,7 +6,7 @@ A minimal Go `net/http` server deployed with the CLI alone, no SDK.
 
 ```bash
 go mod download
-ocel dev
+ocel dev -- go run .
 ```
 
 ## Deploy it
@@ -15,7 +15,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

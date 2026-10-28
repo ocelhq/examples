@@ -7,7 +7,7 @@ An Express 5 app that reads a plain variable with a default and a secret, both d
 ```bash
 pnpm install
 echo "API_KEY=dev-key" > .env   # ocel dev reads its values from .env
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ```bash
@@ -21,7 +21,7 @@ curl localhost:$PORT/whoami -H "x-api-key: dev-key"
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 
@@ -32,4 +32,4 @@ ocel env set API_KEY=your-key
 ocel env ls
 ```
 
-A deploy that finds a declared secret without a value stops and lists it. Set `GREETING` the same way to override its default, or leave it. Values live in your account; the secret is never part of the build.
+A deploy missing a declared value stops and names the `ocel env set` that fills it. Set `GREETING` the same way to override its default, or leave it. Values live in your account; the secret is never part of the build.

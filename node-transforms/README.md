@@ -6,7 +6,7 @@
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm start
 ```
 
 Transforms shape the resources Ocel deploys to your cloud.
@@ -17,7 +17,7 @@ Transforms shape the resources Ocel deploys to your cloud.
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

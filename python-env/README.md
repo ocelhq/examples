@@ -7,7 +7,7 @@ A FastAPI app that reads a plain variable with a default and a secret. The thing
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ```bash
@@ -23,7 +23,7 @@ cp .env.example .env
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

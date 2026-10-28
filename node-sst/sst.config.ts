@@ -2,7 +2,7 @@
 
 export default $config({
   app() {
-    return { name: "sdk-sst", home: "aws" };
+    return { name: "node-sst", home: "aws" };
   },
   async run() {
     const { bind } = await import("@ocel/sst");

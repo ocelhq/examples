@@ -6,7 +6,7 @@ A minimal FastAPI server deployed with the CLI alone, no SDK.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ## Deploy it
@@ -15,7 +15,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

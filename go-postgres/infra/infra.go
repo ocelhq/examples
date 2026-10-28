@@ -1,5 +1,5 @@
 package infra
 
-import "ocel.dev"
+import "ocel.dev/postgres"
 
-var DB = ocel.Postgres("main")
+var DB = postgres.New("main")

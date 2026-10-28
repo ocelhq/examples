@@ -1,13 +1,13 @@
 # go-env
 
-Two variables declared as a struct: one plain with a default, one secret. A `Secret` never prints its value and is read fresh on every `Value()` call, so rotating it reaches a running process.
+Two variables declared as a struct: one plain with a default, one secret. An `env.Secret` never prints its value and is read fresh on every `Value()` call, so rotating it reaches a running process.
 
 ## Run it
 
 ```bash
 go mod download
 echo 'API_KEY=s3cret' > .env
-ocel dev
+ocel dev -- go run .
 ```
 
 `ocel dev` reads the project's `.env`; `GREETING` falls back to its default.
@@ -23,11 +23,11 @@ curl localhost:3000/secret -H "x-api-key: s3cret"
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 
-The variables are declared in [`infra/infra.go`](infra/infra.go) with `ocel.Env`; [`main.go`](main.go) reads `infra.Env.Greeting` and compares `infra.Env.APIKey.Value()` to a request header. Set values with [`ocel env`](https://ocel.dev/docs/cli/env), which addresses production unless you pass `--preview`:
+The variables are declared in [`infra/infra.go`](infra/infra.go) with `env.MustDefine`; [`main.go`](main.go) reads `infra.Env.Greeting` and compares `infra.Env.APIKey.Value()` to a request header. Set values with [`ocel env`](https://ocel.dev/docs/cli/env), which addresses production unless you pass `--preview`:
 
 ```bash
 ocel env set GREETING=howdy API_KEY=s3cret

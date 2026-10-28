@@ -6,7 +6,7 @@ An Express 5 app on a key-value store (Valkey) with a typed text entry that expi
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ```bash
@@ -21,7 +21,7 @@ curl localhost:$PORT/visits/home     # 1, 2, 3, ...
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

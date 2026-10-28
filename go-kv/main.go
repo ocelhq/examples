@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"example.com/go-kv/infra"
-	"ocel.dev"
+	"ocel.dev/kv"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 
 	http.HandleFunc("GET /hits/{page}", func(w http.ResponseWriter, r *http.Request) {
 		count, err := infra.Hits.Get(r.Context(), r.PathValue("page"))
-		if errors.Is(err, ocel.ErrKVMiss) {
+		if errors.Is(err, kv.ErrMiss) {
 			count, err = 0, nil
 		}
 		if err != nil {

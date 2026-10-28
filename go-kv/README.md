@@ -6,7 +6,7 @@ A key-value store with a typed counter entry. Declaring the entry is what gives 
 
 ```bash
 go mod download
-ocel dev
+ocel dev -- go run .
 ```
 
 ```bash
@@ -20,8 +20,8 @@ curl localhost:3000/hits/home
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 
-The store and its entry are declared in [`infra/infra.go`](infra/infra.go) with `ocel.KV` and `ocel.KVCounter`; [`main.go`](main.go) increments in `POST /hits/{page}` and reads in `GET /hits/{page}`, treating `ocel.ErrKVMiss` as zero.
+The store and its entry are declared in [`infra/infra.go`](infra/infra.go) with `kv.New` and `kv.NewCounter`; [`main.go`](main.go) increments in `POST /hits/{page}` and reads in `GET /hits/{page}`, treating `kv.ErrMiss` as zero.

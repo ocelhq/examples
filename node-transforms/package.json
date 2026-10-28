@@ -5,10 +5,10 @@
   "scripts": { "start": "tsx src/server.ts", "typecheck": "tsc --noEmit" },
   "dependencies": {
     "express": "^5.0.0",
-    "ocel": "0.0.2"
+    "ocel": "0.0.4"
   },
   "devDependencies": {
-    "@ocel/transforms": "0.0.2",
+    "@ocel/transforms": "0.0.4",
     "@types/express": "^5.0.0",
     "@types/node": "^20",
     "tsx": "^4.19.2",

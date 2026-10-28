@@ -6,7 +6,7 @@ An axum API that accepts jobs, runs them on a worker, and reports their status. 
 
 ```bash
 cargo build
-ocel dev
+ocel dev -- cargo run
 ```
 
 ```bash
@@ -23,7 +23,7 @@ Send the same `Idempotency-Key` again and you get the original job id back with 
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## Architecture
 

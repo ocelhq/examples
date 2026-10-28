@@ -6,7 +6,7 @@ A realtime channel on Hono. The page subscribes to a room, and a route publishes
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ## Deploy it
@@ -15,7 +15,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

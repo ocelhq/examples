@@ -6,7 +6,7 @@ A pnpm workspace with two apps, a Next.js `web` and an Express `api`, deployed f
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm -r --parallel dev
 ```
 
 ## Deploy it
@@ -15,7 +15,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

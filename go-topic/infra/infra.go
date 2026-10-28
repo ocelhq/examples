@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"ocel.dev"
+	"ocel.dev/topic"
 )
 
 type Order struct {
@@ -12,7 +12,7 @@ type Order struct {
 	Total int    `json:"total"`
 }
 
-var Orders = ocel.Topic[Order]("orders")
+var Orders = topic.New[Order]("orders")
 
 var Receipts = Orders.Consumer("receipts", func(_ context.Context, order Order) error {
 	log.Printf("receipt for order %s: %d", order.ID, order.Total)

@@ -5,7 +5,7 @@ A key-value store (Valkey) declared as a struct field, with a typed counter entr
 ## Run it
 
 ```bash
-ocel dev
+ocel dev -- cargo run
 ```
 
 ## Deploy it
@@ -14,7 +14,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

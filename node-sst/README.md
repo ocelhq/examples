@@ -6,20 +6,22 @@
 
 ```bash
 pnpm install
-sst deploy
-ocel dev
+ocel dev -- pnpm start
 ```
 
-Run `sst deploy` first. The binding it publishes is what the app reads.
+`ocel dev` runs its own Postgres, so it needs nothing from SST.
 
 ## Deploy it
 
 ```bash
+sst deploy
 ocel deploy
 ```
 
-`ocel destroy` takes the app down again, and `sst remove` takes the database down.
+Run `sst deploy` first. The binding it publishes is what the deployed app reads.
+
+`ocel projects destroy` takes the app down again, and `sst remove` takes the database down.
 
 ## How it works
 
-`sst.config.ts` creates the `sst.aws.Postgres` component and passes it straight to `bind.postgres("orders", orders)`, which publishes the connection details. `ocel.json` maps the app's `orders` postgres to that record with `"@orders"`. `infra/index.ts` declares `postgres("orders")` as usual and `src/server.ts` queries it, so the app code is the same whether Ocel or SST provisions the database.
+`sst.config.ts` creates the `sst.aws.Postgres` component and passes it straight to `bind.postgres("orders", orders)`, which publishes the connection details by running the `ocel` CLI in this directory. `ocel.json` maps the app's `orders` postgres to that record with `"@orders"`. `infra/index.ts` declares `postgres("orders")` as usual and `src/server.ts` queries it, so the app code is the same whether Ocel or SST provisions the database.
