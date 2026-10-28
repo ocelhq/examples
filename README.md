@@ -6,10 +6,12 @@ Every directory at the top level is a template that shows one thing: a stack dep
 
 ```bash
 npx giget@latest gh:ocelhq/examples/node-kv my-app
-cd my-app && pnpm install && ocel dev
+cd my-app && pnpm install && ocel dev -- pnpm dev
 ```
 
 Every example is listed in [`examples.json`](examples.json) along with its language, framework and the primitives it uses.
+
+No example carries a deploy target. `ocel dev` needs no config, and `ocel deploy` asks where to deploy and writes the config for you. To write one yourself, copy a complete config for AWS, GCP or a VPS, as JSON, YAML or TypeScript, from [`config/`](config).
 
 ## Stacks
 
