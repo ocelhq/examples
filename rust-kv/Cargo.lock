@@ -549,6 +549,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "hyper-rustls"
+version = "0.27.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dfa8e654703247911e29c23fbeaa261834bd9bb74efba2f9acddc37bfb127f53"
+dependencies = [
+ "http",
+ "hyper",
+ "hyper-util",
+ "rustls",
+ "tokio",
+ "tokio-rustls",
+ "tower-service",
+]
+
+[[package]]
 name = "hyper-util"
 version = "0.1.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -805,9 +820,9 @@ dependencies = [
 
 [[package]]
 name = "ocel-macros"
-version = "0.0.2"
+version = "0.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "353e86658059e6ac7b1ea9d932bff6f13fe531d905ad022153af08569339881e"
+checksum = "480d872d0069162821c723d8e0d01d3555910bba54577551d95478633df82ec4"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -816,9 +831,9 @@ dependencies = [
 
 [[package]]
 name = "ocel-sdk"
-version = "0.0.2"
+version = "0.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c3557234f005e5bf576bbd2e6685173b30a6aa5535064ef858c3a2a02c99800"
+checksum = "73b7479b83042904ab982f0a64b8bad694927d5252ff6d2660f42979fa325808"
 dependencies = [
  "buffa",
  "buffa-types",
@@ -829,6 +844,7 @@ dependencies = [
  "http",
  "http-body-util",
  "hyper",
+ "hyper-rustls",
  "hyper-util",
  "inventory",
  "ocel-macros",
@@ -839,6 +855,7 @@ dependencies = [
  "thiserror",
  "tokio",
  "tokio-util",
+ "webpki-roots",
 ]
 
 [[package]]
@@ -1492,6 +1509,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23f0c9c52aa7cd7d77769a4cfe2a9adb1b331f489a41d912ce14513d5ab995c6"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "webpki-roots"
+version = "1.0.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f5f280bbb2b287bc8e7de7e3852945a0ff50d1bbcb5ed42b6c7a568c546df171"
+dependencies = [
+ "rustls-pki-types",
 ]
 
 [[package]]

@@ -6,7 +6,7 @@ Upload files and hand out short links that expire. The one thing worth noticing:
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 Upload a file, pick an expiry and press Share, then open the `/s/<code>` link.
@@ -17,7 +17,7 @@ Upload a file, pick an expiry and press Share, then open the `/s/<code>` link.
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## Architecture
 

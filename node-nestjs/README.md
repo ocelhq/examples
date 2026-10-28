@@ -6,7 +6,7 @@ A NestJS app with one controller, deployed with no Ocel code in it.
 
 ```bash
 pnpm install && pnpm build
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ## Deploy it
@@ -15,7 +15,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

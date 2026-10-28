@@ -5,7 +5,7 @@ A Postgres database declared as a struct field, used from an axum app through it
 ## Run it
 
 ```bash
-ocel dev
+ocel dev -- cargo run
 ```
 
 ## Deploy it
@@ -14,7 +14,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

@@ -9,7 +9,7 @@ import (
 	"os"
 
 	"example.com/go-bucket/infra"
-	"ocel.dev"
+	"ocel.dev/bucket"
 )
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 			return
 		}
 		err = infra.Uploads.WriteAll(r.Context(), r.PathValue("key"), data,
-			ocel.ContentType(r.Header.Get("content-type")))
+			bucket.ContentType(r.Header.Get("content-type")))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -30,7 +30,7 @@ func main() {
 
 	http.HandleFunc("GET /files/{key...}", func(w http.ResponseWriter, r *http.Request) {
 		reader, err := infra.Uploads.NewReader(r.Context(), r.PathValue("key"))
-		if errors.Is(err, ocel.ErrObjectNotFound) {
+		if errors.Is(err, bucket.ErrObjectNotFound) {
 			http.NotFound(w, r)
 			return
 		}
@@ -45,7 +45,7 @@ func main() {
 
 	http.HandleFunc("GET /files", func(w http.ResponseWriter, r *http.Request) {
 		keys := []string{}
-		for object, err := range infra.Uploads.List(r.Context(), ocel.Prefix(r.URL.Query().Get("prefix"))) {
+		for object, err := range infra.Uploads.List(r.Context(), bucket.Prefix(r.URL.Query().Get("prefix"))) {
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return

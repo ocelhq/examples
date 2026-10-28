@@ -7,7 +7,7 @@ A task placed on a worker you declare yourself. The worker is the compute that r
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ```bash
@@ -22,7 +22,7 @@ curl localhost:3000/reports/<runId>
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

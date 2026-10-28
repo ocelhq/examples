@@ -6,7 +6,7 @@ An Express 5 app that sends orders to a topic and a consumer that handles each o
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ```bash
@@ -21,7 +21,7 @@ The consumer's log line shows up in the `ocel dev` output.
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

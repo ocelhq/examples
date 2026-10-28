@@ -1,7 +1,7 @@
 package infra
 
-import "ocel.dev"
+import "ocel.dev/kv"
 
-var Cache = ocel.KV("cache")
+var Cache = kv.New("cache")
 
-var Hits = ocel.KVCounter[string](Cache, "hits", "hits/:page")
+var Hits = kv.NewCounter[string](Cache, "hits", "hits/:page")

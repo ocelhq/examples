@@ -6,24 +6,26 @@
 
 ```bash
 pnpm install
-pulumi config set aws:region us-east-1
-pulumi config set --secret dbPassword "<a password>"
-pulumi up
-ocel dev
+ocel dev -- pnpm start
 ```
 
-Run `pulumi up` first. The binding it publishes is what the app reads.
+`ocel dev` runs its own Postgres, so it needs nothing from Pulumi.
 
 ## Deploy it
 
 ```bash
+pulumi config set aws:region us-east-1
+pulumi config set --secret dbPassword "<a password>"
+pulumi up
 ocel deploy
 ```
 
-`ocel destroy` takes the app down again, and `pulumi destroy` takes the database down.
+Run `pulumi up` first. The binding it publishes is what the deployed app reads.
+
+`ocel projects destroy` takes the app down again, and `pulumi destroy` takes the database down.
 
 ## How it works
 
-`index.ts` is the Pulumi program: it creates the instance and calls `bind.postgres("orders", ...)` with its address, port, database, username and password. `ocel.json` maps the app's `orders` postgres to that record with `"@orders"`. `infra/index.ts` declares `postgres("orders")` as usual and `src/server.ts` queries it, so the app code is the same whether Ocel or Pulumi provisions the database.
+`index.ts` is the Pulumi program: it creates the instance and calls `bind.postgres("orders", ...)` with its address, port, database, username and password. `ocel.json` maps the app's `orders` postgres to that record with `"@orders"`, and `pulumi up` publishes the record by running the `ocel` CLI in this directory. `infra/index.ts` declares `postgres("orders")` as usual and `src/server.ts` queries it, so the app code is the same whether Ocel or Pulumi provisions the database.
 
 The instance is publicly reachable so the app needs no VPC. Put it in a private network for anything real.

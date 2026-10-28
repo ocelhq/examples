@@ -5,7 +5,8 @@ import (
 	"log"
 	"time"
 
-	"ocel.dev"
+	"ocel.dev/task"
+	"ocel.dev/worker"
 )
 
 type Job struct {
@@ -16,14 +17,14 @@ type Result struct {
 	Slept int `json:"slept"`
 }
 
-var Background = ocel.Worker("worker",
-	ocel.OnStart(func(context.Context) error {
+var Background = worker.New("worker",
+	worker.OnStart(func(context.Context) error {
 		log.Println("worker process started")
 		return nil
 	}),
 )
 
-var Nap = ocel.Task("nap", func(_ context.Context, job Job) (Result, error) {
+var Nap = task.New("nap", func(_ context.Context, job Job) (Result, error) {
 	time.Sleep(time.Duration(job.Seconds) * time.Second)
 	return Result{Slept: job.Seconds}, nil
-}, ocel.UseWorker(Background))
+}, task.UseWorker(Background))

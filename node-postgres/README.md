@@ -6,11 +6,15 @@ An Express 5 notes API on a Postgres database that exists because the code says 
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ```bash
-curl -X POST localhost:$PORT/notes -H content-type:
+curl -X POST localhost:$PORT/notes -H 'content-type: application/json' -d '{"body":"hello"}'
+curl localhost:$PORT/notes
+```
+
+`$PORT` is whatever port `ocel dev` prints.
 
 ## Deploy it
 
@@ -18,12 +22,8 @@ curl -X POST localhost:$PORT/notes -H content-type:
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 
-application/json -d '{"body":"hello"}'
-curl localhost:$PORT/notes
-```
-
-`$PORT` is whatever port `ocel dev` prints.
+`infra/index.ts` declares the database with `postgres("main")`, which returns a `pg` pool. `src/server.ts` imports it, creates the `notes` table when it starts, and inserts and selects with `db.query`.

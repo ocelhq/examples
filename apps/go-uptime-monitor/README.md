@@ -6,7 +6,7 @@ Register URLs and get told when one goes down or comes back. The one thing worth
 
 ```bash
 go mod download
-ocel dev
+ocel dev -- go run .
 ```
 
 ```bash
@@ -24,7 +24,7 @@ A new monitor is probed straight away, then once a minute by the sweep. Incident
 ocel deploy
 ```
 
-`ocel destroy` takes it down again. To have incidents posted somewhere, give the app a webhook that takes `{"text": "..."}`, a Slack incoming webhook for one:
+`ocel projects destroy` takes it down again. To have incidents posted somewhere, give the app a webhook that takes `{"text": "..."}`, a Slack incoming webhook for one:
 
 ```bash
 ocel env set ALERT_WEBHOOK_URL=https://hooks.slack.com/services/...
@@ -36,7 +36,7 @@ ocel env set ALERT_WEBHOOK_URL=https://hooks.slack.com/services/...
 | --- | --- | --- |
 | Postgres `uptime` | `infra/infra.go` | The monitors, and every check ever made, for history and 24-hour uptime. The tables are created on first use (`infra/db.go`). |
 | KV `cache`, entry `latest` | `infra/infra.go` | The latest check per monitor, so `GET /monitors` reads one key per monitor instead of scanning `checks`, and a probe knows the state it is comparing against. |
-| Task `sweep` | `infra/infra.go` | Runs on `Cron("* * * * *")`, reads the monitors and triggers one `probe` per monitor in a single batch. |
+| Task `sweep` | `infra/infra.go` | Runs on `task.Cron("* * * * *")`, reads the monitors and triggers one `probe` per monitor in a single batch. |
 | Task `probe` | `infra/infra.go` | Fetches one URL, records the check, and sends an incident when up/down differs from the last check. Twenty run at once. |
 | Topic `incidents`, consumer `alert` | `infra/infra.go` | Carries state changes to the consumer, which logs them and posts them to `ALERT_WEBHOOK_URL` when set, retrying a webhook that fails. |
 | Env `ALERT_WEBHOOK_URL` | `infra/infra.go` | Optional and sensitive: a pointer field, so the app runs without it. |

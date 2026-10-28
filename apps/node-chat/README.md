@@ -6,7 +6,7 @@ A small chat app on Hono: rooms, messages saved in Postgres, and new messages pu
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 Open the printed URL in two tabs, join the same room, and send a message.
@@ -17,7 +17,7 @@ Open the printed URL in two tabs, join the same room, and send a message.
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## Architecture
 

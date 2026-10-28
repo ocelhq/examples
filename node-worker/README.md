@@ -6,7 +6,7 @@ An Express 5 app that places a task on a worker of its own with a concurrency ca
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ```bash
@@ -20,7 +20,7 @@ curl localhost:$PORT/reports/<id>
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

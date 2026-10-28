@@ -3,7 +3,11 @@ package infra
 import (
 	"time"
 
-	"ocel.dev"
+	"ocel.dev/env"
+	"ocel.dev/kv"
+	"ocel.dev/postgres"
+	"ocel.dev/task"
+	"ocel.dev/topic"
 )
 
 type Target struct {
@@ -31,24 +35,24 @@ type Tick struct {
 	Timestamp string `json:"timestamp"`
 }
 
-var DB = ocel.Postgres("uptime")
+var DB = postgres.New("uptime")
 
-var Cache = ocel.KV("cache")
+var Cache = kv.New("cache")
 
-var Latest = ocel.KVJSON[int64, Check](Cache, "latest", "latest/:monitor")
+var Latest = kv.NewJSON[int64, Check](Cache, "latest", "latest/:monitor")
 
-var Env = ocel.Env[struct {
+var Env = env.MustDefine[struct {
 	AlertWebhook *string `ocel:"ALERT_WEBHOOK_URL,sensitive"`
 }]()
 
-var Incidents = ocel.Topic[Incident]("incidents")
+var Incidents = topic.New[Incident]("incidents")
 
-var Alert = Incidents.Consumer("alert", alert, ocel.Retry(ocel.RetryPolicy{
+var Alert = Incidents.Consumer("alert", alert, topic.Retry{
 	MaxAttempts: 5,
 	MinDelay:    10 * time.Second,
 	MaxDelay:    5 * time.Minute,
-}))
+})
 
-var Probe = ocel.Task("probe", probe, ocel.MaxDuration(30*time.Second), ocel.Concurrency(20))
+var Probe = task.New("probe", probe, task.MaxDuration(30*time.Second), task.Concurrency(20))
 
-var Sweep = ocel.Task("sweep", sweep, ocel.Cron("* * * * *"))
+var Sweep = task.New("sweep", sweep, task.Cron("* * * * *"))

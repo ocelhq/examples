@@ -7,7 +7,7 @@ A FastAPI app that publishes events to a realtime channel that browsers subscrib
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ```bash
@@ -21,7 +21,7 @@ curl -X POST localhost:3000/rooms/lobby/messages -H "content-type: application/j
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

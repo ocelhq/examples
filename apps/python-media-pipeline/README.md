@@ -7,7 +7,7 @@ Upload an image to a FastAPI app and get a thumbnail back, made in the backgroun
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ```bash
@@ -22,7 +22,7 @@ curl localhost:8000/images/<id>/thumbnail -o thumb.jpg
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## Architecture
 

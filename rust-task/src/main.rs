@@ -15,12 +15,6 @@ struct Summary {
     words: usize,
 }
 
-#[derive(ocel::Resources)]
-#[allow(dead_code)]
-struct Infra {
-    worker: ocel::Worker,
-}
-
 #[ocel::task(retry(max_attempts = 3))]
 async fn summarize(document: Document, _run: &ocel::Run) -> Result<Summary, ocel::RunError> {
     Ok(Summary {

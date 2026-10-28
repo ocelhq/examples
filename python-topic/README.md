@@ -7,7 +7,7 @@ A FastAPI app that publishes orders to a topic with two consumers. A topic fans 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ```bash
@@ -24,10 +24,10 @@ Both consumers print to the `ocel dev` log. The second route counts messages `em
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 
 The topic and both consumers are declared in `infra/__init__.py`, and `main.py` sends with `orders.send_async`. The consumers are not served by `main.py`: they run on a worker, so they live in `infra/`, which Ocel's generated worker entry imports. `idempotency_key` makes a repeated order id publish nothing new.
 
-Topic, task and worker, briefly. A **topic** broadcasts messages to every consumer declared on it (`sdk/topic`). A **task** is one function you start a run of and can look up afterwards (`sdk/task`). A **worker** is the compute either of those runs on, which you only declare to size or customise it (`sdk/worker`).
+Topic, task and worker, briefly. A **topic** broadcasts messages to every consumer declared on it (`python-topic`). A **task** is one function you start a run of and can look up afterwards (`python-task`). A **worker** is the compute either of those runs on, which you only declare to size or customise it (`python-worker`).

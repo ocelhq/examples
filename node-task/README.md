@@ -6,7 +6,7 @@ An Express 5 app that triggers a background task from a route and reads the run 
 
 ```bash
 pnpm install
-ocel dev
+ocel dev -- pnpm dev
 ```
 
 ```bash
@@ -20,7 +20,7 @@ curl localhost:$PORT/runs/<id>
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

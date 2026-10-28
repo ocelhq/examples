@@ -11,7 +11,10 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5"
-	"ocel.dev"
+	"ocel.dev/kv"
+	"ocel.dev/runs"
+	"ocel.dev/task"
+	"ocel.dev/topic"
 )
 
 var client = &http.Client{Timeout: 10 * time.Second}
@@ -29,11 +32,11 @@ func sweep(ctx context.Context, tick Tick) (int, error) {
 	if err != nil || len(targets) == 0 {
 		return 0, err
 	}
-	triggers := make([]ocel.Trigger[Target], len(targets))
+	triggers := make([]task.Trigger[Target], len(targets))
 	for i, target := range targets {
 		// A retried sweep sends the same keys, so no monitor is probed twice in one minute.
 		key := fmt.Sprintf("probe-%d-%s", target.ID, tick.Timestamp)
-		triggers[i] = ocel.Trigger[Target]{Payload: target, Options: []ocel.TriggerOption{ocel.IdempotencyKey(key)}}
+		triggers[i] = task.Trigger[Target]{Payload: target, Options: []task.TriggerOption{task.IdempotencyKey(key)}}
 	}
 	if _, err := Probe.BatchTrigger(ctx, triggers...); err != nil {
 		return 0, err
@@ -58,14 +61,14 @@ func probe(ctx context.Context, target Target) (Check, error) {
 
 	previous, err := Latest.Get(ctx, target.ID)
 	switch {
-	case errors.Is(err, ocel.ErrKVMiss):
+	case errors.Is(err, kv.ErrMiss):
 	case err != nil:
 		return check, err
 	case previous.Up != check.Up:
-		run, _ := ocel.RunFrom(ctx)
+		run, _ := runs.FromContext(ctx)
 		// Keyed by the run: if the Set below fails and the run is retried, nobody is paged twice.
 		incident := Incident{Target: target, Up: check.Up, Reason: check.reason(), At: check.At}
-		if _, err := Incidents.Send(ctx, incident, ocel.IdempotencyKey("incident-"+run.ID)); err != nil {
+		if _, err := Incidents.Send(ctx, incident, topic.IdempotencyKey("incident-"+run.ID)); err != nil {
 			return check, err
 		}
 	}

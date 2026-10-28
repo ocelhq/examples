@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"example.com/go-worker/infra"
-	"ocel.dev"
+	"ocel.dev/runs"
 )
 
 func main() {
@@ -26,7 +26,7 @@ func main() {
 	})
 
 	http.HandleFunc("GET /runs/{id}", func(w http.ResponseWriter, r *http.Request) {
-		run, err := ocel.RetrieveRun(r.Context(), r.PathValue("id"))
+		run, err := runs.Retrieve(r.Context(), r.PathValue("id"))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return

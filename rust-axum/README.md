@@ -6,7 +6,7 @@ A minimal axum server deployed with the CLI alone, no SDK.
 
 ```bash
 cargo fetch
-ocel dev
+ocel dev -- cargo run
 ```
 
 ## Deploy it
@@ -15,7 +15,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

@@ -5,7 +5,7 @@ Environment variables declared as a struct: one plain variable with a default, a
 ## Run it
 
 ```bash
-ocel dev
+ocel dev -- cargo run
 ```
 
 ## Deploy it
@@ -14,7 +14,7 @@ ocel dev
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

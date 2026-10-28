@@ -6,7 +6,7 @@ An object bucket with a route that uploads and routes that read back. The bucket
 
 ```bash
 go mod download
-ocel dev
+ocel dev -- go run .
 ```
 
 ```bash
@@ -21,8 +21,8 @@ curl "localhost:3000/files?prefix=notes/"
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 
-The bucket is declared in [`infra/infra.go`](infra/infra.go) with `ocel.Bucket("uploads")`; [`main.go`](main.go) writes with `WriteAll`, streams back with `NewReader` (a missing key is `ocel.ErrObjectNotFound`) and lists with `List`.
+The bucket is declared in [`infra/infra.go`](infra/infra.go) with `bucket.New("uploads")`; [`main.go`](main.go) writes with `WriteAll`, streams back with `NewReader` (a missing key is `bucket.ErrObjectNotFound`) and lists with `List`.

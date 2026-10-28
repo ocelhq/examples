@@ -1,5 +1,5 @@
 package infra
 
-import "ocel.dev"
+import "ocel.dev/bucket"
 
-var Uploads = ocel.Bucket("uploads")
+var Uploads = bucket.New("uploads")

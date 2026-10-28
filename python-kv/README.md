@@ -7,7 +7,7 @@ A FastAPI app that caches user profiles and counts reads in an Ocel-provisioned 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-ocel dev
+ocel dev -- .venv/bin/python main.py
 ```
 
 ```bash
@@ -24,7 +24,7 @@ curl localhost:3000/users/ada
 ocel deploy
 ```
 
-`ocel destroy` takes it down again.
+`ocel projects destroy` takes it down again.
 
 ## How it works
 

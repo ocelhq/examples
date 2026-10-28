@@ -1,8 +1,8 @@
 package infra
 
-import "ocel.dev"
+import "ocel.dev/env"
 
-var Env = ocel.Env[struct {
-	Greeting string      `ocel:"GREETING,default=hello"`
-	APIKey   ocel.Secret `ocel:"API_KEY"`
+var Env = env.MustDefine[struct {
+	Greeting string     `ocel:"GREETING,default=hello"`
+	APIKey   env.Secret `ocel:"API_KEY"`
 }]()

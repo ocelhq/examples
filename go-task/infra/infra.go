@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"ocel.dev"
+	"ocel.dev/task"
 )
 
 type Report struct {
@@ -15,6 +15,6 @@ type Summary struct {
 	Words int `json:"words"`
 }
 
-var Summarize = ocel.Task("summarize", func(_ context.Context, report Report) (Summary, error) {
+var Summarize = task.New("summarize", func(_ context.Context, report Report) (Summary, error) {
 	return Summary{Words: len(strings.Fields(report.Text))}, nil
 })
