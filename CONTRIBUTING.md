@@ -26,7 +26,7 @@ minutes. These rules keep fifty-odd of them consistent and cheap to keep working
 ## One name, everywhere
 
 A name is unique across the whole repo, `apps/` included, so the name alone finds any
-example. The directory, the `ocel.json` slug, the `package.json` name, the Go module
+example. The directory, the `ocel.json` slug where there is one, the `package.json` name, the Go module
 (`example.com/<name>`), the crate name and the README title are all that one string. A
 tool that copies an example out (`giget` today, `ocel init --example <name>` later)
 renames the project by replacing it.
@@ -57,7 +57,7 @@ Each example stands alone, because it is copied out alone:
 
   ```bash
   <install step>
-  ocel dev
+  ocel dev -- <the command that runs the app>
   ```
 
   ## Deploy it
@@ -66,35 +66,30 @@ Each example stands alone, because it is copied out alone:
   ocel deploy
   ```
 
-  `ocel destroy` takes it down again.
+  `ocel projects destroy` takes it down again.
 
   ## How it works
 
   Short. Point at the file where the resource is declared and the file where it is used.
   ````
 
-- **`ocel.json`**, as small as it can be. No `provider`: `ocel deploy` asks for one, and
-  the README never tells the reader which to pick. Leave `apps` off when there is one app
-  at the project root.
-
-  ```json
-  {
-    "$schema": "https://ocel.dev/schema/ocel.schema.json",
-    "slug": "rust-kv"
-  }
-  ```
+- **No `ocel.json`**, unless a config key is what the example shows (`domains`, `apps`,
+  `bindings`, `transforms`). Then it holds that key and the slug, and no `provider`.
+  `ocel dev` needs no config, and `ocel deploy` asks for a target and writes one. The
+  README never tells the reader which target to pick; complete configs for every target
+  live in [`config/`](config).
 
 - **The published SDK at a pinned version**, never a path or workspace link:
-  `ocel@0.0.2` (npm), `ocel-sdk = "0.0.2"` (crates.io, imported as `ocel`),
-  `ocel==0.0.2` (PyPI), `ocel.dev v0.0.2` (Go). An SDK only works with the CLI of its own
+  `ocel@0.0.4` (npm), `ocel-sdk = "0.0.4"` (crates.io, imported as `ocel`),
+  `ocel==0.0.4` (PyPI), `ocel.dev v0.0.4` (Go). An SDK only works with the CLI of its own
   release, so every example pins the same version, and the repo is tagged `v<version>`
   when they all move to it. The CLI is not a dependency; the README assumes `ocel` is
   installed.
 
 ## What no example has
 
-- Provider files (`ocel.vps.json`, `ocel.gcp.json`, …), hosts, IPs, account ids, domains
-  that aren't placeholders.
+- Provider files (`ocel.vps.json`, `ocel.gcp.json`, …); those belong in `config/`. Hosts,
+  IPs, account ids, domains that aren't placeholders.
 - Test scaffolding: probes, nonce headers, anything that exists for a suite rather than
   the reader. Examples are not `tests/fixtures`, and nothing is copied from there without
   stripping that out.
@@ -125,11 +120,12 @@ config, renamed files, inlined assets or README caveats to get around it.
 
 1. The language's own check passes: `tsc --noEmit`, `go build ./...`, `cargo check`,
    `python3 -c "import main"` inside a venv.
-2. `ocel build` succeeds. With no provider in `ocel.json` it can't pick a compute
-   target, so build against a throwaway config beside the real one and delete it after:
+2. `ocel build` succeeds. With no provider it builds on Ocel Cloud when you are logged in
+   and fails otherwise, so build against a throwaway config and delete it after:
 
    ```bash
-   jq '. + {provider: "aws"}' ocel.json > ocel.verify.json
+   { cat ocel.json 2>/dev/null || jq -n --arg s "${PWD##*/}" '{slug: $s}'; } |
+     jq '. + {provider: "aws"}' > ocel.verify.json
    ocel build -c ocel.verify.json && rm ocel.verify.json
    ```
 

@@ -1,0 +1,12 @@
+{
+  "name": "ocel-config-examples",
+  "private": true,
+  "type": "module",
+  "scripts": { "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "ocel": "0.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}
